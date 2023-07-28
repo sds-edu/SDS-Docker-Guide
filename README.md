@@ -109,6 +109,7 @@ What's Next?
 > If you get a `permission denied` error, check you installation and setup. You may have to run the command as an administrator. If you are using linux  you may have to prefix your command with `sudo`. 
 
 ![Docker pull](images/pull.png)
+
 <sup> This an example of what happens when the `docker pull` command is executed to obtain the alpine image. </sup>
 
 To check the images you have on your system, run the command:
