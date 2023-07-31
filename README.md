@@ -303,4 +303,6 @@ Images can be classified into some types based on their usage and source. See th
 ![Alt text](images/classification.png)
 
 ### Building your own Docker Image
-Now that we have a basic understanding of Docker images, lets build our own image. The goal is to create a Docker image that sandboxes a simple Node.js application.
+Now that we have a basic understanding of Docker images, lets build our own image. The goal is to create a Docker image that sandboxes a simple React + ExpressJS application.
+
+First we will put together a simple React App, then dockerize it by writing a Dockerfile. Finally, we will build and run the image.
