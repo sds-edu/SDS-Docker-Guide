@@ -195,3 +195,112 @@ Yay! You successfully ran your first container. 🎉
 
 Now that you are equipped with the basics, lets get to the interesting part - deploying web applications with Docker.
 
+### Running a Static Website with Docker
+For starters, lets do something simple. We will just run a sample static website with Docker. 
+
+The sample that will be used in this section is from dockersamples and can be found [here](https://hub.docker.com/r/dockersamples/static-site).
+
+Run the following command:
+```bash
+docker run -d dockersamples/static-site
+```
+> 📝 **Note:** `-d` (or `--detach`) flag runs the container in detached mode, that is, in the background. It runs the container normally, but will bring you to the terminal prompt after the container is started. This is useful when you want to run a container in the background and continue using the terminal.
+
+The output should be a long hex value. This is the full container ID. 
+```bash
+c3557c35fca64bae767ec7e1b27415425b128dd2cd6af8682fe8a232cfd178ac
+```
+If the image is not already on your device, the Docker daemon will fetch it from the registry. Then it immediately starts the container and runs it in the background.
+
+How do you see the website that is running? How to access it? The thing is, we havent specified a port for the Docker engine to publish to. We will have to re-run docker with the `-P` flag to specify the port.
+
+To stop the container, we will retrive the short container ID with the following command:
+
+```bash
+docker ps
+```
+Ideal output:
+```bash
+CONTAINER ID   IMAGE                       COMMAND                  CREATED         STATUS         PORTS             NAMES
+c3557c35fca6   dockersamples/static-site   "/bin/sh -c 'cd /usr…"   6 minutes ago   Up 6 minutes   80/tcp, 443/tcp   epic_cerf
+```
+
+Use the container ID to refer to the container you want to stop. In this case, it is `c3557c35fca6`. Run the following command:
+```bash
+docker stop c3557c35fca6
+```
+Then remove it using the following command:
+```bash
+docker rm c3557c35fca6
+```
+
+Run the following command to run the container again, but specifying the port:
+```bash
+docker run --name static-site -e AUTHOR="Your Name" -d -P dockersamples/static-site
+```
+
+> 📝 **Note:** `--name` flag allows you to specify a name for the container. `-e` flag allows you to set environment variables. In this case, we set the AUTHOR variable to our name. This will be displayed on the website. `-P` flag publishes all exposed ports to random ports. This is useful when you don't know which port the application will use.
+
+Now see the port using the following command:
+```bash
+docker port static-site
+```
+Output:
+```bash
+80/tcp -> 0.0.0.0:32769
+443/tcp -> 0.0.0.0:32768
+```
+
+Since we are using Docker Desktop, open `http://localhost:[PORT FOR 80/tcp]/` in your browser. In this example it is `http:\\localhost:32769`. You should see the following page:
+
+![Alt text](images/staticsite.png)
+
+<sup> This is an example of the static website running on my machine. </sup>
+
+You can run another webserver at the same time. Previously, we used random ports. But we can also specify the port we want to use. Run the following command:
+```bash
+docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 1234:80 dockersamples/static-site
+```
+Open `http://localhost:1234` in your browser. 
+
+![Alt text](images/staticsite2.png)
+
+<sup> This is an example of the static website running on my machine. </sup>
+
+> ⏰**Reminder**: Stop and remove the containers after you are done with them. Run `docker ps` to make sure they are gone.
+
+In this example, we pulled the `dockersamples/static-site` image from Docker Hub and ran a container based on that image. But what if we want to run our own image? We will explore this in the next section.
+
+### Understanding Docker Images
+As mentioned before, Docker images are the basis of containers. They contain all the required dependencies and configurations to run an application. When a user runs an image, it becomes one or multiple instances of that container.
+
+To see the list of images available locally on your system, run the following command:
+```bash
+docker images
+```
+Below is an example of the output on my device:
+```bash
+REPOSITORY                              TAG       IMAGE ID       CREATED        SIZE
+sevenseasofbri/myfirstapp               latest    a87769a45bf9   6 days ago     56.8MB
+multi-container-app-todo-app            latest    face6e84540a   6 days ago     196MB
+mongo                                   6         fb5fba25b25a   2 weeks ago    654MB
+redis                                   <none>    c1dc010e6f24   2 weeks ago    30.2MB
+docker/welcome-to-docker                latest    912b66cfd46e   5 weeks ago    13.4MB
+postgres                                <none>    696ffaadb338   6 weeks ago    237MB
+alpine                                  latest    c1aabb73d233   6 weeks ago    7.33MB
+hello-world                             latest    9c7a54a9a43c   2 months ago   13.3kB
+dockersamples/examplevotingapp_result   <none>    6ce23a8ce243   7 months ago   256MB
+dockersamples/examplevotingapp_vote     <none>    04e406d349f5   7 months ago   142MB
+dockersamples/examplevotingapp_worker   <none>    03edceb3a0f9   7 months ago   194MB
+dockersamples/visualizer                <none>    43ce62428b8c   2 years ago    185MB
+postgres                                <none>    ed5a45034282   3 years ago    251MB
+dockersamples/static-site               latest    f589ccde7957   7 years ago    191MB
+```
+This is a list of the images I have created and/or pulled from the registry. 
+
+Images can be classified into some types based on their usage and source. See the image below for more information:
+
+![Alt text](images/classification.png)
+
+### Building your own Docker Image
+Now that we have a basic understanding of Docker images, lets build our own image. The goal is to create a Docker image that sandboxes a simple Node.js application.
