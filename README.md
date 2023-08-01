@@ -544,3 +544,5 @@ Yay! You have successfully dockerized your simple React app. 🎉
 - [Dockerizing a Node.js Web App](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
 - [Deploy a React App with Node.js](https://medium.com/@achillesmoraites/serve-a-react-app-with-express-server-c5986769bac)
 - [Docker Curriculum - A Docker Tutorial for Beginners](https://docker-curriculum.com/)
+- [Github Copilot](https://copilot.github.com/) was used to generate some of the content in this manual.
+- [ChatGPT](https://chat.openai.com/) helped with providing an outline for the manual.
