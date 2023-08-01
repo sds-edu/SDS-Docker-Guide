@@ -3,6 +3,23 @@
 <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="250">
 </p>
 
+_**Table of Contents**_
+- [CS3219: Docker and Kubernetes Lab](#cs3219-docker-and-kubernetes-lab)
+  - [Docker](#docker)
+    - [Introduction](#introduction)
+    - [Installation and Setup](#installation-and-setup)
+    - [Concepts and Terminologies](#concepts-and-terminologies)
+    - [Running Your First Container with `docker run`](#running-your-first-container-with-docker-run)
+    - [Running a Static Website with Docker](#running-a-static-website-with-docker)
+    - [Understanding Docker Images](#understanding-docker-images)
+    - [Building your own Docker Image](#building-your-own-docker-image)
+      - [Creating a Simple React App](#creating-a-simple-react-app)
+      - [Writing a Dockerfile](#writing-a-dockerfile)
+      - [Building and Running the Image](#building-and-running-the-image)
+- [References](#references)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## Docker
 Docker Docs defines Docker as follows: 
 > _Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production._
@@ -456,5 +473,74 @@ docker build . -t <your username>/test-web-app
 ```
 > 📝 **Note:** The `-t` flag tags the image. This is useful when you want to refer to the image later. You can name it whatever you want. In this case, I named it `test-web-app`. Also remember to replace `<your username>` with your Docker Hub username. 
 
+Once the build is complete, check if your image is now listed by docker. 
 
+<details>
+  <summary><b>❓Do you remember which command you have to run to check the images on your machine?</b></summary>
+  
+   You're right, the `docker images` command can help you check!
+</details>
+<br>
+The result should contain your image. In this case, it is `sevenseasofbri/test-web-app`.
 
+```bash
+REPOSITORY                              TAG       IMAGE ID       CREATED          SIZE
+sevenseasofbri/test-web-app             latest    5840e4960d7e   15 seconds ago   1.39GB
+```
+
+Run your image using the following command:
+```bash
+docker run -p 1234:8080 -d <your username>/test-web-app
+```
+
+<details>
+  <summary><b>❓Can you recall what the -p and -d tags do?</b></summary>
+   The -p tag publishes the container's port to the host. In this case the container is listening at 8080 and that port is being mapped to 1234 on the host. 
+   
+   The -d tag runs the container in detached mode.
+</details>
+<br>
+
+If you want to see the console logs printed in the container, run the following command:
+```bash
+docker logs <container id>
+```
+
+You should see the following output:
+```bash
+Listening on port 8080
+```
+
+<details>
+  <summary><b>❓How to obtain the container ID? </b></summary>
+   You can use the `docker ps` command to see the containers that are currently running.
+</details>
+<br>
+
+One you have run the command to get the container ID, the output also provides some interesting information - _port mappings_.
+You will get an output like this:
+```bash
+   CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                     NAMES
+b2bea1366fa2   sevenseasofbri/test-web-app   "docker-entrypoint.s…"   8 seconds ago   Up 7 seconds   0.0.0.0:1234->8080
+```
+
+Here, Docker mapped the port 8080 in the container to port 1234 on the host. 
+
+Access your web app at `http://localhost:1234/`. You should see the following page:
+
+![React on Docker](images/reactappondocker.png)
+
+Yay! You have successfully dockerized your simple React app. 🎉
+
+<details>
+  <summary><b>❓Did you remember to shut down the container once you were done? </b></summary>
+   Use `docker stop CONTAINER_ID` to stop the container. Followed by `docker rm CONTAINER_ID` to remove the container. This will free up space if you aren't using the container anymore.
+</details>
+<br>
+
+# References
+- [Docker Docs](https://docs.docker.com/)
+- [Docker Labs](https://github.com/docker/labs/)
+- [Dockerizing a Node.js Web App](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
+- [Deploy a React App with Node.js](https://medium.com/@achillesmoraites/serve-a-react-app-with-express-server-c5986769bac)
+- [Docker Curriculum - A Docker Tutorial for Beginners](https://docker-curriculum.com/)
