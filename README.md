@@ -30,6 +30,8 @@ Docker Desktop provides a GUI to help manage containers, applications, images, e
 
 You can find what is included in Docker Desktop [here](https://docs.docker.com/desktop/).
 
+> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands. Please replace those with your Docker Hub username. If you do not have a Docker Hub account, please create one [here](https://hub.docker.com/signup). If you are using your username for the first time, you may have to login to Docker Hub using the `docker login` command. Sometimes the login command may not work. In that case, you can login to Docker Hub using the Docker Desktop app or restart the terminal and try again.
+
 Test your installation by running the following command in your terminal:
 ```bash
 docker run hello-world
@@ -305,4 +307,154 @@ Images can be classified into some types based on their usage and source. See th
 ### Building your own Docker Image
 Now that we have a basic understanding of Docker images, lets build our own image. The goal is to create a Docker image that sandboxes a simple React + ExpressJS application.
 
-First we will put together a simple React App, then dockerize it by writing a Dockerfile. Finally, we will build and run the image.
+First we will put together a simple React App with an ExpressJS server, then dockerize it by writing a Dockerfile. Finally, we will build and run the image.
+
+#### Creating a Simple React App
+_Prerequisites: Install NodeJS (with npm) and yarn if you haven't already. My node version is LTS v18.17.0, npm is v9.6.7 and yarn v1.22.19._
+
+If you already have a React app with Express server you'd like to dockerize, you can skip this section.
+
+Inside the folder you want to create the  project, run the following commands:
+
+```bash
+mkdir test
+cd test
+npm init -y
+npm install express --save
+npm i -g create-react-app
+```
+This will create a new folder called `test` and initialise a new node project. Then it will install express and create-react-app globally.
+
+You should have `node_modules`, `package-lock.json` and `package.json` in your folder. 
+
+> ⚠️ _**Warning**_ ⚠️: If you are using an old version of npm, you may not have `package-lock.json`. Please be reminded to use a newer version of npm. 
+
+Now we will create a React app. Run the following commands:
+```bash
+create-react-app testapp
+cd testapp
+yarn start
+```
+
+`testapp` is the name of the React app. You can name it whatever you want. `yarn start` will start the development server. You should see the following page open in your browser:
+
+![React Test App](images/reacttestapp.png)
+
+Use control + c to stop the development server. Build the project using `yarn build`. This will create a `build` folder in your project directory. Find it in `testapp/build`.
+
+Go back to the root folder, `test`. Create a file called `index.js`. We will develop the production server for the app here. 
+
+The development server included in create-react-app is not suitable to serve a react app over the internet. It is not optimised for performance and security. We will use ExpressJS to serve the production build of the React app.
+
+Inside `index.js`, add the following code:
+
+```javascript
+const express = require('express');
+const app = express();
+
+// Serve up production assets
+app.use(express.static('testapp/build'));
+
+// Serve up the index.html if the route is not recognized
+const path = require('path');
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'testapp', 'build', 'index.html'));
+});
+
+// If not in production, use port 8080 or the environment port
+const PORT = process.env.PORT || 8080;
+console.log(`Listening on port ${PORT}`);
+app.listen(PORT);
+```
+> ⏰**Reminder**: `testapp` is the name of the React app. If you named it something else, please change the code accordingly.
+
+Run `node index.js` to start the server. Go to http://localhost:8080/ to see the React app running.
+
+Yay! You have successfully created a simple React app with an ExpressJS server. 🎉
+
+#### Writing a Dockerfile
+Now that we have a simple React app with an ExpressJS server, we will write a Dockerfile to containerise it.
+
+Create a file called `Dockerfile` in the project folder. With reference to the previous section, that would be in the `test` folder.
+
+In the Dockerfile we will specify the base image, copy the required files, install dependencies, and start the server. Follow the instructions below to write the Dockerfile.
+
+1. Specify the base image. We will use the `node:18` image. This is the latest long term support (LTS) version of node.  
+```Dockerfile
+FROM node:18
+```
+2. Specify the working directory. This is where the files will be copied to inside the image.  
+```Dockerfile
+WORKDIR /usr/src/app
+```
+3. The image comes with NodeJS and npm pre-installed. We will copy the `package.json` and `package-lock.json` files to the working directory. Then we will install the remaining dependencies.  
+```Dockerfile
+COPY package*.json ./
+```
+4. Install the dependencies.  
+```Dockerfile
+RUN npm install
+```
+5. Add this line, but keep it commented. Uncomment it if you are building code for production.
+```Dockerfile
+# RUN npm ci --omit=dev
+```
+6. Bundle the app's source code inside the Docker image.  
+```Dockerfile
+COPY . .
+```
+7. Expose the port 8080 so it can be mapped by the Docker daemon.   
+```Dockerfile
+EXPOSE 8080
+```
+8. Specify the command to run the app.  
+```Dockerfile
+CMD ["node", "index.js"]
+```
+
+At the end, your Dockerfile will look something like this:
+```Dockerfile
+# Define the image you want to build from.
+# In this case, we are using the latest LTS (long term support) version of Node.
+FROM node:18
+
+# Create app directory to hold application code inside the image.
+WORKDIR /usr/src/app
+
+# The image comes with Node.js and NPM already installed.
+# We just need to install the rest of our dependencies.
+# Copy package.json and package-lock.json to the app directory on the image.
+COPY package*.json ./
+
+# Install dependencies.
+RUN npm install
+
+# Uncomment the following line if you are building code for production.
+# RUN npm ci --omit=dev
+
+# Bundle the app's source code inside the Docker image.
+COPY . .
+
+# Expose port 8080 so it can be mapped by Docker daemon.
+EXPOSE 8080
+
+# Define the command to run your app using CMD which defines your runtime.
+CMD [ "node", "index.js" ]
+```
+Create a `.dockerignore` file in the project folder. This file specifies the files and folders that should be ignored when copying files to the image. Add the following lines to the file:
+```bash
+node_modules
+npm-debug.log
+```
+#### Building and Running the Image
+
+> ⏰**Reminder**: Ensure that your Docker daemon is running before you proceed. You may do this by opening the Docker Desktop app or _running `dockerd` in your terminal (this option is for Linux users)_.
+
+In the directory that contains your Dockerfile, run the following command to build the image:
+```bash
+docker build . -t <your username>/test-web-app
+```
+> 📝 **Note:** The `-t` flag tags the image. This is useful when you want to refer to the image later. You can name it whatever you want. In this case, I named it `test-web-app`. Also remember to replace `<your username>` with your Docker Hub username. 
+
+
+
