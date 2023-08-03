@@ -1,28 +1,28 @@
-# CS3219: Getting Started with Docker
+# 1. A Guide to Getting Started with Docker
 <p align= "center">
 <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="250">
 </p>
 
 _**Table of Contents**_
-- [CS3219: Getting Started with Docker](#cs3219-getting-started-with-docker)
-  - [Introduction](#introduction)
-  - [Installation and Setup](#installation-and-setup)
-  - [Concepts and Terminologies](#concepts-and-terminologies)
-  - [Running Your First Container with `docker run`](#running-your-first-container-with-docker-run)
-  - [Running a Static Website with Docker](#running-a-static-website-with-docker)
-  - [Understanding Docker Images](#understanding-docker-images)
-  - [Building your own Docker Image](#building-your-own-docker-image)
-    - [Creating a Simple React App](#creating-a-simple-react-app)
-    - [Writing a Dockerfile](#writing-a-dockerfile)
-    - [Building and Running the Image](#building-and-running-the-image)
-- [Additional Information](#additional-information)
-  - [Benefits of Using Docker](#benefits-of-using-docker)
-- [References](#references)
+- [1. A Guide to Getting Started with Docker](#1-a-guide-to-getting-started-with-docker)
+  - [1.1. Introduction](#11-introduction)
+  - [1.2. Installation and Setup](#12-installation-and-setup)
+  - [1.3. Concepts and Terminologies](#13-concepts-and-terminologies)
+  - [1.4. Running Your First Container with `docker run`](#14-running-your-first-container-with-docker-run)
+  - [1.5. Running a Static Website with Docker](#15-running-a-static-website-with-docker)
+  - [1.6. Understanding Docker Images](#16-understanding-docker-images)
+  - [1.7. Building your own Docker Image](#17-building-your-own-docker-image)
+    - [1.7.1. Creating a Simple React App](#171-creating-a-simple-react-app)
+    - [1.7.2. Writing a Dockerfile](#172-writing-a-dockerfile)
+    - [1.7.3. Building and Running the Image](#173-building-and-running-the-image)
+- [2. Additional Information](#2-additional-information)
+  - [2.1. Benefits of Using Docker](#21-benefits-of-using-docker)
+- [3. References](#3-references)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 
-## Introduction
+## 1.1. Introduction
 [Docker Docs](https://docs.docker.com/) defines Docker as follows: 
 > _Docker is an open platform for developing, shipping, and running applications. Docker enables you to separate your applications from your infrastructure so you can deliver software quickly. With Docker, you can manage your infrastructure in the same ways you manage your applications. By taking advantage of Docker’s methodologies for shipping, testing, and deploying code quickly, you can significantly reduce the delay between writing code and running it in production._
 
@@ -32,14 +32,14 @@ Docker containers are relatively well isolated from eachother and the host machi
 
 Unlike virtual machines, containers do not have high overhead and therefore able to efficiently use the system resources. 
 
-## Installation and Setup
-Please install Docker for your respective OS [here](https://docs.docker.com/get-docker/).
+## 1.2. Installation and Setup
+Install Docker for your respective OS [here](https://docs.docker.com/get-docker/).
 
-Please follow the instructions/install updates (if any). If successful, you will have installed [Docker Desktop](https://docs.docker.com/desktop/) on your device. 
+Follow the instructions/install updates (if any). If successful, you will have installed [Docker Desktop](https://docs.docker.com/desktop/) on your device. 
 
 Docker Desktop provides a GUI to help manage containers, applications, images, etc. It can be used as is or as a complementary tool to the Docker CLI.
 
-> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands. Please replace those with your Docker Hub username. If you do not have a Docker Hub account, please create one [here](https://hub.docker.com/signup). If you are using your username for the first time, you may have to login to Docker Hub using the `docker login` command. Sometimes the login command may not work. In that case, you can login to Docker Hub using the Docker Desktop app or restart the terminal and try again.
+> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands. Replace those with your Docker Hub username. If you do not have a Docker Hub account, create one [here](https://hub.docker.com/signup). If you are using your username for the first time, you may have to login to Docker Hub using the `docker login` command. Sometimes the login command may not work. In that case, you can login to Docker Hub using the Docker Desktop app or restart the terminal and try again.
 
 Test your installation by running the following command in your terminal:
 ```bash
@@ -74,7 +74,7 @@ For more examples and ideas, visit:
 
 > 📝 **Note:** Running your terminal and Docker at different privilege levels may cause issues. For example, running your terminal as an administrator and docker as a normal user may cause issues. If you face any issues, try running both at the same privilege level.
 
-## Concepts and Terminologies
+## 1.3. Concepts and Terminologies
 Before we get our hands dirty, lets familiarise ourselves with some of the common concepts and terminologies associated with Docker.
 
 Docker uses a client-server architecture. The Docker _daemon_ is what builds, runs and distributes the Docker containers. A Docker client communicates with the _daemon_. These can run on same or different machines. The table below summarises the common terminologies used in Docker.
@@ -91,7 +91,7 @@ Docker uses a client-server architecture. The Docker _daemon_ is what builds, ru
 
 <sup> A part of this table was generated with the help of Github Copilot </sup>
 
-## Running Your First Container with `docker run`
+## 1.4. Running Your First Container with `docker run`
 Now that we have Docker installed and have a basic understanding of Docker, lets run our first container.
 
 > ⏰**Reminder**: Ensure that your Docker daemon is running before you proceed. You may do this by opening the Docker Desktop app or _running `dockerd` in your terminal (this option is for Linux users)_.
@@ -121,7 +121,7 @@ What's Next?
 
 ![Docker pull](images/pull.png)
 
-<sup> This an example of what happens when the `docker pull` command is executed to obtain the alpine image. </sup>
+<sup> Figure 1.4.1: This an example of what happens when the `docker pull` command is executed to obtain the alpine image. </sup>
 
 To check the images you have on your system, run the command:
 ```bash
@@ -154,7 +154,7 @@ Basically what we did was run the `ls -l` command on the Alpine image. This comm
 
 ![Docker Run](images/run.png)
 
-<sup> This an example of what happens when the `docker run` command is executed for an Alpine container. </sup>
+<sup> Figure 1.4.2: This an example of what happens when the `docker run` command is executed for an Alpine container. </sup>
 
 Lets try some more commands in the container. Run the following:
 ```bash
@@ -206,7 +206,7 @@ Yay! You successfully ran your first container. 🎉
 
 Now that you are equipped with the basics, lets get to the interesting part - deploying web applications with Docker.
 
-## Running a Static Website with Docker
+## 1.5. Running a Static Website with Docker
 For starters, lets do something simple. We will just run a sample static website with Docker. The sample that will be used in this section is from [dockersamples](https://hub.docker.com/r/dockersamples/static-site).
 
 Run the following command:
@@ -264,7 +264,7 @@ Since we are using Docker Desktop, open `http://localhost:[PORT FOR 80/tcp]/` in
 
 ![Alt text](images/staticsite.png)
 
-<sup> This is an example of the static website running on my machine. </sup>
+<sup> Figure 1.5.1: This is an example of the static website running on my machine. </sup>
 
 You can run another webserver at the same time. Previously, we used random ports. But we can also specify the port we want to use. Run the following command:
 ```bash
@@ -274,13 +274,13 @@ Open `http://localhost:1234` in your browser.
 
 ![Alt text](images/staticsite2.png)
 
-<sup> This is an example of the static website running on my machine. </sup>
+<sup> Figure 1.5.2: This is an example of the static website running on my machine. </sup>
 
 > ⏰**Reminder**: Stop and remove the containers after you are done with them. Run `docker ps` to make sure they are gone.
 
 In this example, we pulled the `dockersamples/static-site` image from Docker Hub and ran a container based on that image. But what if we want to run our own image? We will explore this in the next section.
 
-## Understanding Docker Images
+## 1.6. Understanding Docker Images
 As mentioned before, Docker images are the basis of containers. They contain all the required dependencies and configurations to run an application. When a user runs an image, it becomes one or multiple instances of that container.
 
 To see the list of images available locally on your system, run the following command:
@@ -311,12 +311,14 @@ Images can be classified into some types based on their usage and source. See th
 
 ![Alt text](images/classification.png)
 
-## Building your own Docker Image
+<sup>Figure 1.6.1: Classification of Images in Docker</sup>
+
+## 1.7. Building your own Docker Image
 Now that we have a basic understanding of Docker images, lets build our own image. The goal is to create a Docker image that sandboxes a simple React + ExpressJS application.
 
 First we will put together a simple React App with an ExpressJS server, then dockerize it by writing a Dockerfile. Finally, we will build and run the image.
 
-### Creating a Simple React App
+### 1.7.1. Creating a Simple React App
 _Prerequisites: Install NodeJS (with npm) and yarn if you haven't already. My node version is LTS v18.17.0, npm is v9.6.7 and yarn v1.22.19._
 
 If you already have a React app with Express server you'd like to dockerize, you can skip this section.
@@ -334,7 +336,7 @@ This will create a new folder called `test` and initialise a new node project. T
 
 You should have `node_modules`, `package-lock.json` and `package.json` in your folder. 
 
-> ⚠️ _**Warning**_ ⚠️: If you are using an old version of npm, you may not have `package-lock.json`. Please be reminded to use a newer version of npm. 
+> ⚠️ _**Warning**_ ⚠️: If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use a newer version of npm. 
 
 Now we will create a React app. Run the following commands:
 ```bash
@@ -346,6 +348,8 @@ yarn start
 `testapp` is the name of the React app. You can name it whatever you want. `yarn start` will start the development server. You should see the following page open in your browser:
 
 ![React Test App](images/reacttestapp.png)
+
+<sup>Figure 1.7.1.1: React sample application running on localhost:3000</sup>
 
 Use control + c to stop the development server. Build the project using `yarn build`. This will create a `build` folder in your project directory. Find it in `testapp/build`.
 
@@ -373,13 +377,13 @@ const PORT = process.env.PORT || 8080;
 console.log(`Listening on port ${PORT}`);
 app.listen(PORT);
 ```
-> ⏰**Reminder**: `testapp` is the name of the React app. If you named it something else, please change the code accordingly.
+> ⏰**Reminder**: `testapp` is the name of the React app. If you named it something else, change the code accordingly.
 
 Run `node index.js` to start the server. Go to http://localhost:8080/ to see the React app running.
 
 Yay! You have successfully created a simple React app with an ExpressJS server. 🎉
 
-### Writing a Dockerfile
+### 1.7.2. Writing a Dockerfile
 Now that we have a simple React app with an ExpressJS server, we will write a Dockerfile to containerise it.
 
 Create a file called `Dockerfile` in the project folder. With reference to the previous section, that would be in the `test` folder.
@@ -453,7 +457,7 @@ Create a `.dockerignore` file in the project folder. This file specifies the fil
 node_modules
 npm-debug.log
 ```
-### Building and Running the Image
+### 1.7.3. Building and Running the Image
 
 > ⏰**Reminder**: Ensure that your Docker daemon is running before you proceed. You may do this by opening the Docker Desktop app or _running `dockerd` in your terminal (this option is for Linux users)_.
 
@@ -520,6 +524,8 @@ Access your web app at `http://localhost:1234/`. You should see the following pa
 
 ![React on Docker](images/reactappondocker.png)
 
+<sup>Figure 1.7.3.1: React sample application running on localhost:1234</sup>
+
 Yay! You have successfully dockerized your simple React app. 🎉
 
 <details>
@@ -528,13 +534,13 @@ Yay! You have successfully dockerized your simple React app. 🎉
 </details>
 <br>
 
-# Additional Information 
-## Benefits of Using Docker
+# 2. Additional Information 
+## 2.1. Benefits of Using Docker
 Apart from portability, Docker has many benefits, including:
 1. **Streamlining [SDLC](## "Software Development Lifecycle")**: Allows developers to work in standardised environments with local containers. As such, containers are very useful in [CI/CD](## "continuous integration and continuous delivery/continuous deployment" ) workflows.  
 2. **Scaling**: Docker's portability and lightweight nature allows for easy scaling of applications. It makes it easy to dynamically manage workloads, scale up/tear down applications and services as required, in almost real-time.
 3. **Allowing multiple workloads on same hardware**: Docker provides a cost-effective alternative to virtual machines. 
-# References
+# 3. References
 - [Docker Docs](https://docs.docker.com/)
 - [Docker Labs](https://github.com/docker/labs/)
 - [Dockerizing a Node.js Web App](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
