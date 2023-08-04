@@ -82,12 +82,12 @@ Docker uses a client-server architecture. The Docker _daemon_ is what builds, ru
 | Term | Desrciption |
 | --- | --- |
 | Docker Daemon | Listens to Docker API requests. Manages Docker objects - images, containers, networks and volumes. It can also communicate with other daemons. |
-| Docker Client | The primary way users interact with Docker. It sends commands to the Docker Daemon. It can communicate with >1 daemon. |
-| Docker Desktop | A GUI tool that includes the Docker daemon, client, Docker Compose, Content Trust, Kubernetes, etc. |
-| Docker Registry | A repository for Docker images. Docker Hub is the default registry. Using `docker pull` or `docker run` commands uses the required images from the configured registry. |
-| Docker Objects | Images, containers, networks, volumes, plugins, etc. |
 | Docker Images | Read-only templates used to create Docker containers. You can create your own image or use pre-existing ones. |
 | Docker Container | A runnable instance of an image. You can create, start, stop, move, or delete a container using the Docker API or CLI. |
+| Docker Registry | A repository for Docker images. Docker Hub is the default registry. Using `docker pull` or `docker run` commands uses the required images from the configured registry. |
+| Docker Client | The primary way users interact with Docker. It sends commands to the Docker Daemon. It can communicate with >1 daemon. |
+| Docker Desktop | A GUI tool that includes the Docker daemon, client, Docker Compose, Content Trust, Kubernetes, etc. |
+| Docker Objects | Images, containers, networks, volumes, plugins, etc. |
 
 <sup> A part of this table was generated with the help of Github Copilot </sup>
 
@@ -264,17 +264,17 @@ Since we are using Docker Desktop, open `http://localhost:[PORT FOR 80/tcp]/` in
 
 ![Alt text](images/staticsite.png)
 
-<sup> Figure 1.5.1: This is an example of the static website running on my machine. </sup>
+<sup> Figure 1.5.1: This is an example of the static website. </sup>
 
 You can run another webserver at the same time. Previously, we used random ports. But we can also specify the port we want to use. Run the following command:
 ```bash
-docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 1234:80 dockersamples/static-site
+docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 12345:80 dockersamples/static-site
 ```
-Open `http://localhost:1234` in your browser. 
+Open `http://localhost:12345` in your browser. 
 
-![Alt text](images/staticsite2.png)
+![Static site running on port 12345](images/staticsite2.png)
 
-<sup> Figure 1.5.2: This is an example of the static website running on my machine. </sup>
+<sup> Figure 1.5.2: This is an example of the static website running in parallel on port 12345. </sup>
 
 > ⏰**Reminder**: Stop and remove the containers after you are done with them. Run `docker ps` to make sure they are gone.
 
@@ -287,10 +287,10 @@ To see the list of images available locally on your system, run the following co
 ```bash
 docker images
 ```
-Below is an example of the output on my device:
+Below is an example of the output:
 ```bash
 REPOSITORY                              TAG       IMAGE ID       CREATED        SIZE
-sevenseasofbri/myfirstapp               latest    a87769a45bf9   6 days ago     56.8MB
+<your username>/myfirstapp               latest    a87769a45bf9   6 days ago     56.8MB
 multi-container-app-todo-app            latest    face6e84540a   6 days ago     196MB
 mongo                                   6         fb5fba25b25a   2 weeks ago    654MB
 redis                                   <none>    c1dc010e6f24   2 weeks ago    30.2MB
@@ -305,7 +305,7 @@ dockersamples/visualizer                <none>    43ce62428b8c   2 years ago    
 postgres                                <none>    ed5a45034282   3 years ago    251MB
 dockersamples/static-site               latest    f589ccde7957   7 years ago    191MB
 ```
-This is a list of the images I have created and/or pulled from the registry. 
+This is a list of the images that have been created and/or pulled from the registry on that particular machine. 
 
 Images can be classified into some types based on their usage and source. See the image below for more information:
 
@@ -319,7 +319,7 @@ Now that we have a basic understanding of Docker images, lets build our own imag
 First we will put together a simple React App with an ExpressJS server, then dockerize it by writing a Dockerfile. Finally, we will build and run the image.
 
 ### 1.7.1. Creating a Simple React App
-_Prerequisites: Install NodeJS (with npm) and yarn if you haven't already. My node version is LTS v18.17.0, npm is v9.6.7 and yarn v1.22.19._
+_Prerequisites: Install NodeJS (with npm) and yarn if you haven't already. We suggest that you use this node version for the purposes of this module => LTS v18.17.0, npm is v9.6.7 and yarn v1.22.19._
 
 If you already have a React app with Express server you'd like to dockerize, you can skip this section.
 
@@ -465,7 +465,7 @@ In the directory that contains your Dockerfile, run the following command to bui
 ```bash
 docker build . -t <your username>/test-web-app
 ```
-> 📝 **Note:** The `-t` flag tags the image. This is useful when you want to refer to the image later. You can name it whatever you want. In this case, I named it `test-web-app`. Also remember to replace `<your username>` with your Docker Hub username. 
+> 📝 **Note:** The `-t` flag tags the image. This is useful when you want to refer to the image later. You can name it whatever you want. In this case, it is named `test-web-app`. Also remember to replace `<your username>` with your Docker Hub username. 
 
 Once the build is complete, check if your image is now listed by docker. 
 
@@ -475,21 +475,21 @@ Once the build is complete, check if your image is now listed by docker.
    You're right, the `docker images` command can help you check!
 </details>
 <br>
-The result should contain your image. In this case, it is `sevenseasofbri/test-web-app`.
+The result should contain your image. In this case, it is `<your username>/test-web-app`.
 
 ```bash
 REPOSITORY                              TAG       IMAGE ID       CREATED          SIZE
-sevenseasofbri/test-web-app             latest    5840e4960d7e   15 seconds ago   1.39GB
+<your username>/test-web-app             latest    5840e4960d7e   15 seconds ago   1.39GB
 ```
 
 Run your image using the following command:
 ```bash
-docker run -p 1234:8080 -d <your username>/test-web-app
+docker run -p 12345:8080 -d <your username>/test-web-app
 ```
 
 <details>
   <summary><b>❓Can you recall what the -p and -d tags do?</b></summary>
-   The -p tag publishes the container's port to the host. In this case the container is listening at 8080 and that port is being mapped to 1234 on the host. 
+   The -p tag publishes the container's port to the host. In this case the container is listening at 8080 and that port is being mapped to 12345 on the host. 
    
    The -d tag runs the container in detached mode.
 </details>
@@ -515,16 +515,16 @@ One you have run the command to get the container ID, the output also provides s
 You will get an output like this:
 ```bash
    CONTAINER ID   IMAGE                         COMMAND                  CREATED         STATUS         PORTS                     NAMES
-b2bea1366fa2   sevenseasofbri/test-web-app   "docker-entrypoint.s…"   8 seconds ago   Up 7 seconds   0.0.0.0:1234->8080
+b2bea1366fa2   <your username>/test-web-app   "docker-entrypoint.s…"   8 seconds ago   Up 7 seconds   0.0.0.0:12345->8080
 ```
 
-Here, Docker mapped the port 8080 in the container to port 1234 on the host. 
+Here, Docker mapped the port 8080 in the container to port 12345 on the host. 
 
-Access your web app at `http://localhost:1234/`. You should see the following page:
+Access your web app at `http://localhost:12345/`. You should see the following page:
 
 ![React on Docker](images/reactappondocker.png)
 
-<sup>Figure 1.7.3.1: React sample application running on localhost:1234</sup>
+<sup>Figure 1.7.3.1: React sample application running on localhost:12345</sup>
 
 Yay! You have successfully dockerized your simple React app. 🎉
 
@@ -541,6 +541,7 @@ Apart from portability, Docker has many benefits, including:
 2. **Scaling**: Docker's portability and lightweight nature allows for easy scaling of applications. It makes it easy to dynamically manage workloads, scale up/tear down applications and services as required, in almost real-time.
 3. **Allowing multiple workloads on same hardware**: Docker provides a cost-effective alternative to virtual machines. 
 # 3. References
+The information in this guide has been collated from the following sources:
 - [Docker Docs](https://docs.docker.com/)
 - [Docker Labs](https://github.com/docker/labs/)
 - [Dockerizing a Node.js Web App](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
