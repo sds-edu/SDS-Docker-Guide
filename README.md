@@ -577,5 +577,3 @@ The information in this guide has been collated from the following sources:
 - [Docker Curriculum - A Docker Tutorial for Beginners](https://docker-curriculum.com/)
 - [Github Copilot](https://copilot.github.com/) was used to generate some of the content in this manual.
 - [ChatGPT](https://chat.openai.com/) helped with providing an outline for the manual.
-
-![Alt text](image.png)
