@@ -533,6 +533,7 @@ Listening on port 8080
 
 <details open markdown="block">
   <summary><b>❓How to obtain the container ID? </b></summary>
+
    You can use the `docker ps` command to see the containers that are currently running.
 </details>
 <br>
@@ -556,6 +557,7 @@ Yay! You have successfully dockerized your simple React app. 🎉
 
 <details open markdown="block">
   <summary><b>❓Did you remember to shut down the container once you were done? </b></summary>
+  
    Use `docker stop CONTAINER ID` to stop the container. Followed by `docker rm CONTAINER ID` to remove the container. This will free up space if you aren't using the container anymore.
 </details>
 <br>
