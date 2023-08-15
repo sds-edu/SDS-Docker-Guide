@@ -30,7 +30,7 @@ Docker containers are relatively well isolated from eachother and the host machi
 
 Unlike virtual machines, containers do not have high overhead and therefore able to efficiently use the system resources.
 
-<details open markdown="block">
+<details markdown="block">
    <summary> <b>🔍Click here to read about the common concepts and terminologies used in Docker.</b> </summary>
    Before we get our hands dirty, lets familiarise ourselves with some of the common concepts and terminologies associated with Docker.
 
@@ -283,7 +283,7 @@ Open `http://localhost:12345` in your browser.
 ## 1.5. Building and Running Your Own Docker Image
 In the previous exercise, we ran a static website using an existing image from Docker Hub. In this section, we will build our own image.
 
-<details open markdown="block">
+<details markdown="block">
    <summary><b>🔍Click here to find out more about Images in Docker.</b></summary>
    As mentioned before, Docker images are the basis of containers. They contain all the required dependencies and configurations to run an application. When a user runs an image, it becomes one or multiple instances of that container.
 
@@ -381,7 +381,7 @@ const PORT = process.env.PORT || 8080;
 console.log(`Listening on port ${PORT}`);
 app.listen(PORT);
 ```
-<details open markdown="block">
+<details markdown="block">
 <summary> <b>🔍Click here to find out more about what the code above does</b></summary>
 The code above sets up an Express server that serves a React web application in production. It first serves static assets from the 'testapp/build' folder. If a route is not recognized, it sends the 'index.html' file from the same folder, allowing the React app to handle the routing on the client-side. The server listens on the port defined by the environment variable 'PORT', and if not set, it defaults to port 8080.
 </details>
@@ -495,7 +495,7 @@ docker build . -t <your username>/test-web-app
 
 Once the build is complete, check if your image is now listed by docker. 
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓Do you remember which command you have to run to check the images on your machine?</b></summary>
   
    You're right, the `docker images` command can help you check!
@@ -513,7 +513,7 @@ Run your image using the following command:
 docker run -p 12345:8080 -d <your username>/test-web-app
 ```
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓Can you recall what the -p and -d tags do?</b></summary>
    The -p tag publishes the container's port to the host. In this case the container is listening at 8080 and that port is being mapped to 12345 on the host. 
    
@@ -531,7 +531,7 @@ You should see the following output:
 Listening on port 8080
 ```
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓How to obtain the container ID? </b></summary>
 
    You can use the `docker ps` command to see the containers that are currently running.
@@ -555,7 +555,7 @@ Access your web app at `http://localhost:12345/`. You should see the following p
 
 Yay! You have successfully dockerized your simple React app. 🎉
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓Did you remember to shut down the container once you were done? </b></summary>
   
    Use `docker stop CONTAINER ID` to stop the container. Followed by `docker rm CONTAINER ID` to remove the container. This will free up space if you aren't using the container anymore.
