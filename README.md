@@ -1,10 +1,16 @@
-# 1. A Guide to Getting Started with Docker
-<p align= "center">
-<img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="250">
-</p>
+# CS3219 SE Toolbox - Containerization
+The CS3219 SE Toolbox is a collection of guides and resources to help you get started with the various tools and technologies used CS3219 - Software Engineering Principles and Patterns. 
+
+This toolbox focuses on containerization using Docker. It contains hands-on activities and a guide to help you get started with Docker.
 
 _**Table of Contents**_
-- [1. A Guide to Getting Started with Docker](#1-a-guide-to-getting-started-with-docker)
+- [CS3219 SE Toolbox - Containerization](#cs3219-se-toolbox---containerization)
+- [Instructions and Objectives](#instructions-and-objectives)
+  - [Activity 1](#activity-1)
+  - [Activity 2](#activity-2)
+  - [Activity 3](#activity-3)
+  - [Activity 4 - Challenge](#activity-4---challenge)
+- [1. Getting Started with Docker](#1-getting-started-with-docker)
   - [1.1. Introduction](#11-introduction)
   - [1.2. Installation and Setup](#12-installation-and-setup)
   - [1.3. Running Your First Container with `docker run`](#13-running-your-first-container-with-docker-run)
@@ -21,6 +27,53 @@ _**Table of Contents**_
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+# Instructions and Objectives
+- As you work your way through the activities in this section, you might want to refer to the [Docker Guide](#1-getting-started-with-docker).
+- You may work on these activities with your teammates.
+- These activities serve as a way to help you get started with Docker. You are encouraged to explore and experiment with Docker on your own as well.
+
+## Activity 1
+>📌**Objective**: Setup Docker and learn to interact with the container
+
+- Setup Docker and test the installation by running a simple container. You can find the instructions in Sections [1.2](#12-installation-and-setup) and [1.3](#13-running-your-first-container-with-docker-run) of the guide. You may choose to run a container of a lightweight image like BusyBox or Alpine.
+- Run an echo command on the image from outside the container 
+- Note how to interact with the container. 
+
+> **Takeaway**: Observe the outcomes of each task and note down your observations. You do not need to submit anything for this activity.
+
+## Activity 2
+>📌**Objective**: Learn how to run pre-built images, and publish to ports to view web applications
+
+- Follow the instructions in Section [1.4](#14-running-a-sample-static-website-with-docker) of the guide.
+- Try publishing to different ports. 
+- **Extra**: Pull and run any Docker image you find interesting in Docker Hub. Explain what it does, and the steps taken to run it.  
+
+> **Takeaway**: Observe the outcomes of each task and note down your observations. You do not need to submit anything for this activity.
+
+## Activity 3
+>📌**Objective**: Learn how to write a Dockerfile to Dockerize your application. And then build and run your custom image.
+- Write a simple ReactJS web application with an ExpressJS server that displays “Hello <YOUR FULL NAME>, this is running in a Docker container.” 
+- Dockerise the above application by writing a Dockerfile. Explain the significance behind the commands used in the Dockerfile. 
+- Build and run the image using the Dockerfile you created previously. Map the container port to port 3000 on the host if available. 
+- Play around and see if you can run the app on 2 different containers at 2 different ports. 
+
+> **Takeaway**: Demonstrate/show screenshots of your web app running on the Docker container. Show the outcomes of running the app on multiple containers (on different ports). 
+
+## Activity 4 - Challenge
+- In the above exercises, you focused on single-container environments. Multi-container environments can easily be run using the Docker compose tool.  
+- Docker’s [awesome-compose](https://github.com/docker/awesome-compose) samples provide a starting point on how to integrate different frameworks and technologies using Docker compose. 
+- Check out the samples in awesome-compose repository and try one/some of them out. They are ready to run with docker compose up.
+
+> **Takeaway**: Demonstrate/show screenshots of the multi-container environment you composed and share your learning about the Docker Compose tool with the class. Some questions you can try to answer: 
+> - How does docker compose simplify the workflow? 
+> - What does the set of containers you tried help you to achieve? (I.e., what can you do with those set of containers). 
+> - Did you try to compose something different? What difficulties did you face? 
+
+
+# 1. Getting Started with Docker
+<p align= "center">
+<img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="250">
+</p>
 
 ## 1.1. Introduction
 [Docker Docs](https://docs.docker.com/) defines Docker as follows: 
