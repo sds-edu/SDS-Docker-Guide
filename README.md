@@ -588,20 +588,7 @@ Yay! You have successfully dockerized your simple React app. 🎉
 </details>
 <br>
 
-# 2. Additional Information 
-## 2.1. Benefits of Using Docker
-Apart from portability, Docker has many benefits, including:
-1. **Streamlining [SDLC](## "Software Development Lifecycle")**: Allows developers to work in standardised environments with local containers. As such, containers are very useful in [CI/CD](## "continuous integration and continuous delivery/continuous deployment" ) workflows.  
-2. **Scaling**: Docker's portability and lightweight nature allows for easy scaling of applications. It makes it easy to dynamically manage workloads, scale up/tear down applications and services as required, in almost real-time.
-3. **Allowing multiple workloads on same hardware**: Docker provides a cost-effective alternative to virtual machines. 
-
-## 2.2. Important Notes on this Guide
-This guide provides an introduction to Docker by covering fundamental use cases, offering an essential starting point for those new to Docker. It aims to equip you with a foundational understanding of containerization, helping you grasp concepts like creating and running containers, and deploying simple applications. As you become more comfortable with these basics, you'll find yourself better prepared to delve into more intricate Docker scenarios. More advanced applications, such as those involving databases, demand multiple containers and varying deployment approaches. This guide serves as a stepping stone, laying the groundwork for your journey into the realm of more intricate Docker use cases.
-
-### 2.2.1. Example: Dockerizing a React Web App with Database and REST API
-An example of a more complex Docker use case would be dockerizing a React web app with a database and REST API. This would involve creating multiple containers, each with its own Dockerfile. The containers would then be linked together using Docker Compose.
-
-# 3. References
+References
 The information in this guide has been collated from the following sources:
 - [Docker Docs](https://docs.docker.com/)
 - [Docker Labs](https://github.com/docker/labs/)
