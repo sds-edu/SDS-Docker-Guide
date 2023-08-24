@@ -40,7 +40,7 @@ _Observe the outcomes of each task and note down your observations. You may find
         > - Did you try to compose something different? What difficulties did you face? 
 
 
-## 1. Getting Started with Docker
+##  Getting Started with Docker
 <p align= "center">
 <img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" width="250">
 </p>
