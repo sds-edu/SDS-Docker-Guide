@@ -588,7 +588,8 @@ Yay! You have successfully dockerized your simple React app. 🎉
 </details>
 <br>
 
-References
+## References
+
 The information in this guide has been collated from the following sources:
 - [Docker Docs](https://docs.docker.com/)
 - [Docker Labs](https://github.com/docker/labs/)
