@@ -6,7 +6,7 @@ This toolbox focuses on containerization using Docker. It contains hands-on acti
 _**Table of Contents**_
 - [CS3219 SE Toolbox - Containerization](#cs3219-se-toolbox---containerization)
 - [Instructions and Objectives](#instructions-and-objectives)
-  - [Setup Docker](#activity-1)
+  - [Activity 1](#activity-1)
   - [Activity 2](#activity-2)
   - [Activity 3](#activity-3)
   - [Activity 4 - Challenge](#activity-4---challenge)
