@@ -30,14 +30,14 @@ _Observe the outcomes of each task and note down your observations. You may find
     - Play around and see if you can run the app on 2 different containers at 2 different ports.
 
 4. Using Docker compose tool
-Multi-container environments can easily be run using the Docker compose tool.
+
+   - Multi-container environments can easily be run using the Docker compose tool.
    - Docker’s [awesome-compose](https://github.com/docker/awesome-compose) samples provide a starting point on how to integrate different frameworks and technologies using Docker compose.
    - Check out the samples in awesome-compose repository and try one/some of them out. They are ready to run with docker compose up.
-
-  Some questions you can try to answer:
-> - How does docker compose simplify the workflow? 
-> - What does the set of containers you tried help you to achieve? (I.e., what can you do with those set of containers). 
-> - Did you try to compose something different? What difficulties did you face? 
+   - Some questions you can try to answer as you gain experience with `awesome-compose`:
+        > - How does docker compose simplify the workflow? 
+        > - What does the set of containers you tried help you to achieve? (I.e., what can you do with those set of containers). 
+        > - Did you try to compose something different? What difficulties did you face? 
 
 
 ## 1. Getting Started with Docker
