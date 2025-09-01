@@ -55,7 +55,7 @@ Docker containers are relatively well isolated from eachother and the host machi
 
 Unlike virtual machines, containers do not have high overhead and therefore able to efficiently use the system resources.
 
-<details markdown="block">
+<details markdown="block" open>
    <summary> <b>🔍Click here to read about the common concepts and terminologies used in Docker.</b> </summary>
    Before we get our hands dirty, lets familiarise ourselves with some of the common concepts and terminologies associated with Docker.
 
