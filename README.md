@@ -399,11 +399,10 @@ First we will put together a simple React App with an ExpressJS server, then doc
 
 ### 1.5.1. Creating a Simple React App
 
-**Prerequisites:** Ensure **Node.js** (with **npm**) and **Yarn** are installed. For the purposes of this module, we recommend using the following versions:
+**Prerequisites:** Ensure **Node.js** (with **npm**) are installed. For the purposes of this module, we recommend using the following versions:
 
 - **Node.js (LTS):** v24.13.0
 - **npm:** v11.6.2
-- **Yarn:** v1.22.22
 
 If you already have a React app with Express server you'd like to dockerize, you go the [the next section](#152-writing-a-dockerfile).
 
