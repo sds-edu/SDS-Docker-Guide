@@ -14,7 +14,7 @@ As you work your way through the [Docker Guide](#1-getting-started-with-docker) 
    - Run an echo command on the image from outside the container
    - Note how to interact with the container.
 
-    >💡 _Observe the outcomes of each task and note down your observations. You may find it useful when using Docker later for assignment or project._
+    >💡 _Note down your observations of the outcomes of each task. You may find it useful when using Docker later for assignment or project._
 
 2. Learn how to run pre-built images, and publish to ports to view web applications
 
@@ -22,9 +22,9 @@ As you work your way through the [Docker Guide](#1-getting-started-with-docker) 
    - Try publishing to different ports.
    - Additionally you can try this  : Pull and run any Docker image you find interesting in Docker Hub. Explain what it does, and the steps taken to run it.
 
-    >💡 _Observe the outcomes of each task and note down your observations. You may find it useful when using Docker later for assignment or project._
+    >💡 _Note down your observations of the outcomes of each task. You may find it useful when using Docker later for assignment or project._
 
-3. Learn how to write a Dockerfile to Dockerize your application. And then build and run your custom image.
+3. Learn how to write a Dockerfile to dockerize your application, and build/run a custom image.
 
     - Write a simple ReactJS web application with an ExpressJS server that displays “Hello \<YOUR FULL NAME>, this is running in a Docker container.”
     - Dockerise the above application by writing a Dockerfile. Explain the significance behind the commands used in the Dockerfile.
@@ -330,7 +330,7 @@ Output:
 443/tcp -> 0.0.0.0:32768
 ```
 
-Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http:\\localhost:32769>. You should see the following page:
+Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32769>. You should see the following page:
 
 ![Alt text](images/staticsite.png)
 
@@ -419,7 +419,7 @@ This will create a new folder called `test/` and initialise a new node project. 
 
 You should have `node_modules`, `package-lock.json` and `package.json` in your folder.
 
-> ⚠️ _**Warning**_ ⚠️: If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use a newer version of npm.
+> ⚠️ _**Warning**_ ⚠️: If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use he recommended version of npm (v11.6.2).
 
 Now we will create a React app. Run the following commands:
 
@@ -601,7 +601,7 @@ Defines the base image to use to start the build process. It has to be the first
 
 ### 1.5.3. Building and Running the Image
 
-> ⏰ **Reminder**: Ensure that your Docker daemon is running before you proceed. You may do this by opening the Docker Desktop app or _running `dockerd` in your terminal (this option is for Linux users)_.
+> ⏰ **Reminder**: Ensure that your Docker daemon is running before you proceed. You may do this by opening the Docker Desktop app or, on Linux, _by running `dockerd` in your terminal_.
 
 In the directory that contains your Dockerfile, run the following command to build the image:
 
