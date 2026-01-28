@@ -6,7 +6,7 @@ The guide and resources below  focuses on containerization using Docker.
 
 ## Objectives
 
-As you work your way through the [Docker Guide](#1-getting-started-with-docker) you will achieve the following:
+As you work your way through the [Docker Guide](#getting-started-with-docker) you will achieve the following:
 
 1. Setup Docker and learn to interact with the container
 
