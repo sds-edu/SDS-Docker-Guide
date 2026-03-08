@@ -1,4 +1,4 @@
-# SDS Toolbox - Containerization
+# Containerization
 
 The Software Design School (SDS) Toolbox is a collection of guides and resources to help you get started with the various tools and technologies used in software engineering.
 
