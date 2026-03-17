@@ -698,4 +698,7 @@ The information in this guide has been collated from the following sources:
 - [Deploy a React App with Node.js](https://medium.com/@achillesmoraites/serve-a-react-app-with-express-server-c5986769bac)
 - [Docker Curriculum - A Docker Tutorial for Beginners](https://docker-curriculum.com/)
 - [Github Copilot](https://copilot.github.com/) was used to generate some of the content in the Docker guide.
-- [ChatGPT](https://chat.openai.com/) helped with providing an outline for the Docker guide.
+
+## AI Declaration
+
+Some parts of this guide were structured, formatted, and refined with the assistance of `ChatGPT` . The model was used to draft technical explanations and generate code snippets. All code snippets used in the guide and command sequences were reviewed, implemented, and tested by the teaching team to ensure accuracy and functionality.
