@@ -58,7 +58,7 @@ Docker containers are relatively well isolated from eachother and the host machi
 
 Unlike virtual machines, containers do not have high overhead and therefore able to efficiently use the system resources.
 
-<details open markdown="block">
+<details markdown="block">
    <summary> <b>🔍Click here to read about the common concepts and terminologies used in Docker.</b> </summary>
    Before we get our hands dirty, lets familiarise ourselves with some of the common concepts and terminologies associated with Docker.
 
@@ -118,8 +118,8 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-> ⚠️ _**Warning**_ ⚠️
-    You will face errors if you don't start the Docker daemon before running the command. If you are using Docker Desktop, you can start the daemon by clicking on the Docker icon in your taskbar/open the Docker Desktop app. If you are using Docker CLI, you can start the daemon by running `dockerd` in your terminal (This option better applies to Linux users).
+> ⚠️ _**Warning:**_ ⚠️ You will face errors if you don't start the Docker daemon before running the command. If you are using Docker Desktop, you can start the daemon by clicking on the Docker icon in your taskbar/open the Docker Desktop app. If you are using Docker CLI, you can start the daemon by running `dockerd` in your terminal (This option better applies to Linux users).
+> 
 > 📝 **Note:** Running your terminal and Docker at different privilege levels may cause issues. For example, running your terminal as an administrator and docker as a normal user may cause issues. If you face any issues, try running both at the same privilege level.
 
 ## 1.3. Running Your First Container with `docker run`
@@ -140,7 +140,7 @@ This will pull the latest [Alpine](https://hub.docker.com/_/alpine) image from D
 
 If successful, you should see something similar to the following output:
 
-```bash
+```txt
 Using default tag: latest
 latest: Pulling from library/alpine
 Digest: sha256:82d1e9d7ed48a7523bdebc18cf6290bdb97b82302a8a9c27d4fe885949ea94d1
@@ -151,8 +151,7 @@ What's Next?
   View summary of image vulnerabilities and recommendations → docker scout quickview alpine
 ```
 
-> ⚠️ _**Warning**_ ⚠️
-> If you get a `permission denied` error, check you installation and setup. You may have to run the command as an administrator. If you are using linux  you may have to prefix your command with `sudo`.
+> ⚠️ _**Warning:**_ ⚠️ If you get a `permission denied` error, check you installation and setup. You may have to run the command as an administrator. If you are using linux  you may have to prefix your command with `sudo`.
 
 ![Docker pull](images/pull.png)
 
@@ -354,7 +353,7 @@ Open <http://localhost:12345> in your browser.
 
 In the previous exercise, we ran a static website using an existing image from Docker Hub. In this section, we will build our own image.
 
-<details open markdown="block">
+<details markdown="block">
    <summary><b> 🔍 Click here to find out more about Images in Docker.</b></summary>
    As mentioned before, Docker images are the basis of containers. They contain all the required dependencies and configurations to run an application. When a user runs an image, it becomes one or multiple instances of that container.
 
@@ -421,7 +420,7 @@ This will create a new folder called `test/` and initialise a new node project. 
 
 You should have `node_modules`, `package-lock.json` and `package.json` in your folder.
 
-> ⚠️ _**Warning**_ ⚠️: If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use he recommended version of npm (v11.6.2).
+> ⚠️ _**Warning:**_ ⚠️ If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use he recommended version of npm (v11.6.2).
 
 Now we will create a React app. Run the following commands:
 
@@ -429,7 +428,7 @@ Now we will create a React app. Run the following commands:
 npm create vite@latest testapp -- --template react
 ```
 
->💬 **Interactive Prompts**: During this process, you may be asked the interactive questions in your terminal. Please select "No" for all.
+>📝 **Note:** During this process, you may be asked the interactive questions in your terminal. Please select "No" for all.
 
 ```bash
 cd testapp
@@ -476,7 +475,7 @@ console.log(`Listening on port ${PORT}`);
 app.listen(PORT);
 ```
 
-<details open markdown="block">
+<details markdown="block">
 <summary> <b>🔍 Click here to find out more about what the code above does</b></summary>
 The code above sets up an Express server that serves a React web application in production. It first serves static assets from the 'testapp/build' folder. If a route is not recognized, it sends the 'index.html' file from the same folder, allowing the React app to handle the routing on the client-side. The server listens on the port defined by the environment variable 'PORT', and if not set, it defaults to port 8080.
 </details>
@@ -496,7 +495,7 @@ Yay! You have successfully created a simple React app with an ExpressJS server. 
 
 ### 1.5.2. Writing a Dockerfile
 
-Now that we have a simple React app with an ExpressJS server, we will write a Dockerfile to containerise it. A Dockerfile is a simple text document that provides users with a set of clear instructions for building an image using the command line. Docker can build images automatically by reading the instructions from a Dockerfile.
+Now that we have a simple React app with an ExpressJS server, we will write a Dockerfile to containerize it. A Dockerfile is a simple text document that provides users with a set of clear instructions for building an image using the command line. Docker can build images automatically by reading the instructions from a Dockerfile.
 
 Create a file called `Dockerfile` in the project folder. With reference to the previous section, that would be in the `test/` folder.
 
@@ -615,7 +614,7 @@ docker build . -t <your username>/test-web-app
 
 Once the build is complete, check if your image is now listed by docker.
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓Do you remember which command you have to run to check the images on your machine?</b></summary>
 
    You're right, the `docker images` command can help you check!
@@ -635,7 +634,7 @@ Run your image using the following command:
 docker run -p 12345:8080 -d <your username>/test-web-app
 ```
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓ Can you recall what the -p and -d tags do?</b></summary>
    The -p tag publishes the container's port to the host. In this case the container is listening at 8080 and that port is being mapped to 12345 on the host.
 
@@ -655,7 +654,7 @@ You should see the following output:
 Listening on port 8080
 ```
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓ How to obtain the container ID? </b></summary>
 
    You can use the `docker ps` command to see the containers that are currently running.
@@ -680,7 +679,7 @@ Access your web app at <http://localhost:12345/>. You should see the following p
 
 Yay! You have successfully dockerized your simple React app. 🎉
 
-<details open markdown="block">
+<details markdown="block">
   <summary><b>❓ Did you remember to shut down the container once you were done? </b></summary>
 
    Use `docker stop <CONTAINER ID>` to stop the container. Followed by `docker rm <CONTAINER ID>` to remove the container. This will free up space if you aren't using the container anymore.
