@@ -10,7 +10,7 @@ As you work your way through the [Docker Guide](#getting-started-with-docker) yo
 
 1. Setup Docker and learn to interact with the container
 
-   - Setup Docker and test the installation by running a simple container. You can find the instructions in Sections [1.2](#12-installation-and-setup) and [1.3](#13-running-your-first-container-with-docker-run) of the guide. You may choose to run a container of a lightweight image like BusyBox or Alpine.
+   - Setup Docker and test the installation by running a simple container. You may choose to run a container of a lightweight image like BusyBox or Alpine.
    - Run an echo command on the image from outside the container
    - Note how to interact with the container.
 
@@ -18,15 +18,14 @@ As you work your way through the [Docker Guide](#getting-started-with-docker) yo
 
 2. Learn how to run pre-built images, and publish to ports to view web applications
 
-   - Follow the instructions in Section [1.4](#14-running-a-sample-static-website-with-docker) of the guide.
    - Try publishing to different ports.
-   - Additionally you can try this  : Pull and run any Docker image you find interesting in Docker Hub. Explain what it does, and the steps taken to run it.
+   - Optionally, pull and run any Docker image you find interesting in Docker Hub. Explain what it does, and the steps taken to run it.
 
     >💡 _Note down your observations of the outcomes of each task. You may find it useful when using Docker later for assignment or project._
 
 3. Learn how to write a Dockerfile to dockerize your application, and build/run a custom image.
 
-    - Write a simple ReactJS web application with an ExpressJS server that displays “Hello \<YOUR FULL NAME>, this is running in a Docker container.”
+    - Write a simple ReactJS web application with an ExpressJS server.
     - Dockerise the above application by writing a Dockerfile. Explain the significance behind the commands used in the Dockerfile.
     - Build and run the image using the Dockerfile you created previously. Map the container port to port 3000 on the host if available.
     - Play around and see if you can run the app on 2 different containers at 2 different ports.
