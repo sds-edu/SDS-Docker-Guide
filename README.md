@@ -84,7 +84,9 @@ Follow the instructions/install updates (if any). If successful, you will have i
 
 Docker Desktop provides a GUI to help manage containers, applications, images, etc. It can be used as is or as a complementary tool to the Docker CLI.
 
-> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands. Replace those with your Docker Hub username. If you do not have a Docker Hub account, create one [here](https://hub.docker.com/signup). If you are using your username for the first time, you may have to login to Docker Hub using the `docker login` command. Sometimes the login command may not work. In that case, you can login to Docker Hub using the Docker Desktop app or restart the terminal and try again.
+> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands, used to tag images you build yourself (e.g. `<your username>/test-web-app`). This guide doesn't require you to push any images, so a Docker Hub account isn't strictly necessary to complete the exercises — you can substitute any placeholder for `<your username>`.
+>
+> That said, it's good practice to tag your images as `<your username>/<image name>` from the start, using your actual Docker Hub username. This is the naming convention Docker Hub expects, so if you ever run `docker push` to publish an image, it'll already be tagged correctly with no renaming needed. If you'd like to create an account now, you can do so [here](https://hub.docker.com/signup). If you use your username for the first time, you may have to log in via the `docker login` command. Sometimes the login command may not work — in that case, log in using the Docker Desktop app or restart your terminal and try again.
 
 Test your installation by running the following command in your terminal:
 
