@@ -328,11 +328,13 @@ docker port static-site
 Output:
 
 ```bash
-80/tcp -> 0.0.0.0:32768
-443/tcp -> 0.0.0.0:32769
+80/tcp -> 0.0.0.0:32774
+443/tcp -> 0.0.0.0:32775
 ```
 
-Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32768>. You should see the following page:
+> 📝 **Note:** With `-P`, Docker picks random free (ephemeral) ports, so **the port numbers you get will likely be different** from the example above - or match up again next time you run a container. Just use whatever `docker port` reports for you.
+
+Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32774>. You should see the following page:
 
 ![Alt text](images/staticsite.png)
 
@@ -694,6 +696,18 @@ Yay! You have successfully dockerized your simple React app. 🎉
 </details>
 <br>
 
+## 1.6. What is Docker Compose?
+
+So far, we've only worked with one container at a time. Most real applications aren't just one container, though — a typical app might need a frontend, a backend API, and a database, each running in its own container, all talking to each other.
+
+You could start each of these manually with separate `docker run` commands, but that gets tedious and error-prone fast — you'd have to remember every flag, every port, every environment variable, and the right order to start things in.
+
+**Docker Compose** solves this by letting you describe your entire multi-container setup — all the services, how they're configured, and how they connect to each other — in a single file. From there, you can bring the whole application up or down as one unit, instead of managing each container by hand.
+
+This is especially useful for local development, where you often want to spin up a whole stack (app + database + cache, etc.) with minimal setup, and for keeping that setup consistent and shareable across a team.
+
+You'll get a chance to try this out using Docker's [awesome-compose](https://github.com/docker/awesome-compose) samples — see Objective 4 above.
+
 ## References
 
 The information in this guide has been collated from the following sources:
@@ -707,4 +721,4 @@ The information in this guide has been collated from the following sources:
 
 ## AI Declaration
 
-Some parts of this guide were structured, formatted, and refined with the assistance of `ChatGPT` and `Github Copilot` . The model was used to draft technical explanations and generate code snippets. All code snippets used in the guide and command sequences were reviewed, implemented, and tested by the teaching team to ensure accuracy and functionality.
+Some parts of this guide were structured, formatted, and refined with the assistance of `ChatGPT`, `Claude` and `Github Copilot` . The models were used to draft technical explanations and generate code snippets. All code snippets used in the guide and command sequences were reviewed, implemented, and tested by the teaching team to ensure accuracy and functionality.
