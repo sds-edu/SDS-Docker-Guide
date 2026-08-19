@@ -280,6 +280,8 @@ The output should be a long hex value. This is the full container ID.
 c3557c35fca64bae767ec7e1b27415425b128dd2cd6af8682fe8a232cfd178ac
 ```
 
+> 📝 **Note:** Docker generates a random, unique ID for every container, so your container ID **may not match** the one shown above. Whenever this guide references a container ID (like `c3557c35fca6` in the examples below), substitute in your own — you can always find it by running `docker ps`.
+
 If the image is not already on your device, the Docker daemon will fetch it from the registry. Then it immediately starts the container and runs it in the background.
 
 How do you see the website that is running? The thing is, we havent specified a port for the Docker engine to publish to. We will have to re-run docker with the `-P` flag to specify the port.
@@ -326,11 +328,11 @@ docker port static-site
 Output:
 
 ```bash
-80/tcp -> 0.0.0.0:32769
-443/tcp -> 0.0.0.0:32768
+80/tcp -> 0.0.0.0:32768
+443/tcp -> 0.0.0.0:32769
 ```
 
-Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32769>. You should see the following page:
+Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32768>. You should see the following page:
 
 ![Alt text](images/staticsite.png)
 
@@ -341,6 +343,8 @@ You can run another webserver at the same time. Previously, we used random ports
 ```bash
 docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 12345:80 dockersamples/static-site
 ```
+
+> 📝 **Note:** `-p <host port>:<container port>` maps a specific port on your machine to a specific port inside the container — here, `12345:80` maps host port `12345` to container port `80`. Unlike `-P`, which picks a random host port for you, `-p` lets you choose the exact port.
 
 Open <http://localhost:12345> in your browser.
 
@@ -421,7 +425,7 @@ This will create a new folder called `test/` and initialise a new node project. 
 
 You should have `node_modules`, `package-lock.json` and `package.json` in your folder.
 
-> ⚠️ _**Warning:**_ ⚠️ If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use he recommended version of npm (v11.6.2).
+> ⚠️ _**Warning:**_ ⚠️ If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use the recommended version of npm (v11.6.2).
 
 Now we will create a React app. Run the following commands:
 
@@ -429,7 +433,10 @@ Now we will create a React app. Run the following commands:
 npm create vite@latest testapp -- --template react
 ```
 
->📝 **Note:** During this process, you may be asked the interactive questions in your terminal. Please select "No" for all.
+>📝 **Note:** During this process, you'll be asked a couple of interactive questions in your terminal:
+>
+> - **Which linter would you like to use?** Select **ESLint**.
+> - **Install with npm and start now?** Select **No** — we'll install and start it manually in the next step.
 
 ```bash
 cd testapp
