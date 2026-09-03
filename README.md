@@ -10,7 +10,7 @@ As you work your way through the [Docker Guide](#getting-started-with-docker) yo
 
 1. Setup Docker and learn to interact with the container
 
-   - Setup Docker and test the installation by running a simple container. You can find the instructions in Sections [1.2](#12-installation-and-setup) and [1.3](#13-running-your-first-container-with-docker-run) of the guide. You may choose to run a container of a lightweight image like BusyBox or Alpine.
+   - Setup Docker and test the installation by running a simple container. You may choose to run a container of a lightweight image like BusyBox or Alpine.
    - Run an echo command on the image from outside the container
    - Note how to interact with the container.
 
@@ -18,15 +18,14 @@ As you work your way through the [Docker Guide](#getting-started-with-docker) yo
 
 2. Learn how to run pre-built images, and publish to ports to view web applications
 
-   - Follow the instructions in Section [1.4](#14-running-a-sample-static-website-with-docker) of the guide.
    - Try publishing to different ports.
-   - Additionally you can try this  : Pull and run any Docker image you find interesting in Docker Hub. Explain what it does, and the steps taken to run it.
+   - Optionally, pull and run any Docker image you find interesting in Docker Hub. Explain what it does, and the steps taken to run it.
 
     >💡 _Note down your observations of the outcomes of each task. You may find it useful when using Docker later for assignment or project._
 
 3. Learn how to write a Dockerfile to dockerize your application, and build/run a custom image.
 
-    - Write a simple ReactJS web application with an ExpressJS server that displays “Hello \<YOUR FULL NAME>, this is running in a Docker container.”
+    - Write a simple ReactJS web application with an ExpressJS server.
     - Dockerise the above application by writing a Dockerfile. Explain the significance behind the commands used in the Dockerfile.
     - Build and run the image using the Dockerfile you created previously. Map the container port to port 3000 on the host if available.
     - Play around and see if you can run the app on 2 different containers at 2 different ports.
@@ -85,7 +84,9 @@ Follow the instructions/install updates (if any). If successful, you will have i
 
 Docker Desktop provides a GUI to help manage containers, applications, images, etc. It can be used as is or as a complementary tool to the Docker CLI.
 
-> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands. Replace those with your Docker Hub username. If you do not have a Docker Hub account, create one [here](https://hub.docker.com/signup). If you are using your username for the first time, you may have to login to Docker Hub using the `docker login` command. Sometimes the login command may not work. In that case, you can login to Docker Hub using the Docker Desktop app or restart the terminal and try again.
+> 📝 **Note:** Some parts of this manual will refer to `<your username>` in some of the Docker CLI commands, used to tag images you build yourself (e.g. `<your username>/test-web-app`). This guide doesn't require you to push any images, so a Docker Hub account isn't strictly necessary to complete the exercises — you can substitute any placeholder for `<your username>`.
+>
+> That said, it's good practice to tag your images as `<your username>/<image name>` from the start, using your actual Docker Hub username. This is the naming convention Docker Hub expects, so if you ever run `docker push` to publish an image, it'll already be tagged correctly with no renaming needed. If you'd like to create an account now, you can do so [here](https://hub.docker.com/signup). If you use your username for the first time, you may have to log in via the `docker login` command. Sometimes the login command may not work — in that case, log in using the Docker Desktop app or restart your terminal and try again.
 
 Test your installation by running the following command in your terminal:
 
@@ -279,6 +280,8 @@ The output should be a long hex value. This is the full container ID.
 c3557c35fca64bae767ec7e1b27415425b128dd2cd6af8682fe8a232cfd178ac
 ```
 
+> 📝 **Note:** Docker generates a random, unique ID for every container, so your container ID **may not match** the one shown above. Whenever this guide references a container ID (like `c3557c35fca6` in the examples below), substitute in your own — you can always find it by running `docker ps`.
+
 If the image is not already on your device, the Docker daemon will fetch it from the registry. Then it immediately starts the container and runs it in the background.
 
 How do you see the website that is running? The thing is, we havent specified a port for the Docker engine to publish to. We will have to re-run docker with the `-P` flag to specify the port.
@@ -325,11 +328,13 @@ docker port static-site
 Output:
 
 ```bash
-80/tcp -> 0.0.0.0:32769
-443/tcp -> 0.0.0.0:32768
+80/tcp -> 0.0.0.0:32774
+443/tcp -> 0.0.0.0:32775
 ```
 
-Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32769>. You should see the following page:
+> 📝 **Note:** With `-P`, Docker picks random free (ephemeral) ports, so **the port numbers you get will likely be different** from the example above - or match up again next time you run a container. Just use whatever `docker port` reports for you.
+
+Since we are using Docker Desktop, open `http://localhost:< PORT FOR "80/tcp" >/` in your browser. In this example it is <http://localhost:32774>. You should see the following page:
 
 ![Alt text](images/staticsite.png)
 
@@ -340,6 +345,8 @@ You can run another webserver at the same time. Previously, we used random ports
 ```bash
 docker run --name static-site-2 -e AUTHOR="Your Name" -d -p 12345:80 dockersamples/static-site
 ```
+
+> 📝 **Note:** `-p <host port>:<container port>` maps a specific port on your machine to a specific port inside the container — here, `12345:80` maps host port `12345` to container port `80`. Unlike `-P`, which picks a random host port for you, `-p` lets you choose the exact port.
 
 Open <http://localhost:12345> in your browser.
 
@@ -420,7 +427,7 @@ This will create a new folder called `test/` and initialise a new node project. 
 
 You should have `node_modules`, `package-lock.json` and `package.json` in your folder.
 
-> ⚠️ _**Warning:**_ ⚠️ If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use he recommended version of npm (v11.6.2).
+> ⚠️ _**Warning:**_ ⚠️ If you are using an old version of npm, you may not have `package-lock.json`. This is a reminder to use the recommended version of npm (v11.6.2).
 
 Now we will create a React app. Run the following commands:
 
@@ -428,7 +435,10 @@ Now we will create a React app. Run the following commands:
 npm create vite@latest testapp -- --template react
 ```
 
->📝 **Note:** During this process, you may be asked the interactive questions in your terminal. Please select "No" for all.
+>📝 **Note:** During this process, you'll be asked a couple of interactive questions in your terminal:
+>
+> - **Which linter would you like to use?** Select **ESLint**.
+> - **Install with npm and start now?** Select **No** — we'll install and start it manually in the next step.
 
 ```bash
 cd testapp
@@ -686,6 +696,18 @@ Yay! You have successfully dockerized your simple React app. 🎉
 </details>
 <br>
 
+## 1.6. What is Docker Compose?
+
+So far, we've only worked with one container at a time. Most real applications aren't just one container, though — a typical app might need a frontend, a backend API, and a database, each running in its own container, all talking to each other.
+
+You could start each of these manually with separate `docker run` commands, but that gets tedious and error-prone fast — you'd have to remember every flag, every port, every environment variable, and the right order to start things in.
+
+**Docker Compose** solves this by letting you describe your entire multi-container setup — all the services, how they're configured, and how they connect to each other — in a single file. From there, you can bring the whole application up or down as one unit, instead of managing each container by hand.
+
+This is especially useful for local development, where you often want to spin up a whole stack (app + database + cache, etc.) with minimal setup, and for keeping that setup consistent and shareable across a team.
+
+You'll get a chance to try this out using Docker's [awesome-compose](https://github.com/docker/awesome-compose) samples — see Objective 4 above.
+
 ## References
 
 The information in this guide has been collated from the following sources:
@@ -699,4 +721,4 @@ The information in this guide has been collated from the following sources:
 
 ## AI Declaration
 
-Some parts of this guide were structured, formatted, and refined with the assistance of `ChatGPT` and `Github Copilot` . The model was used to draft technical explanations and generate code snippets. All code snippets used in the guide and command sequences were reviewed, implemented, and tested by the teaching team to ensure accuracy and functionality.
+Some parts of this guide were structured, formatted, and refined with the assistance of `ChatGPT`, `Claude` and `Github Copilot` . The models were used to draft technical explanations and generate code snippets. All code snippets used in the guide and command sequences were reviewed, implemented, and tested by the teaching team to ensure accuracy and functionality.
